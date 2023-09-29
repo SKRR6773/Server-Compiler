@@ -88,6 +88,22 @@ class Server:
                 data = []                                               # keep data for send to client when last loop
 
 
+                '''
+                    ****
+                    ****
+                    ****
+                    ****
+                    ****
+                    ****
+                    problem here
+                    ****
+                    ****
+                    ****
+                    ****
+                    ****
+                    ****
+                '''
+
                 package_recv = client.recv(BUFFER)                      # recv msg from client (no decode)
 
 
@@ -168,23 +184,24 @@ class Server:
                                 error.append(f"uuid not already")
 
 
-                        elif package_decoded['action'] == "compile":
+                        elif package_decoded['action'] == "compile":    # ส่วนในการ Compile
                             pass
 
-                        elif package_decoded['action'] == "settings_compile":
-                            # Options
+                        elif package_decoded['action'] == "settings_compile":    
+                            # Options    
                             '''
+                                ตัวอย่าง args ที่ต้องการในการ Compile
                                 # subprocess.run([
-                                #     'pyinstaller', 
-                                #     '--noconfirm',
-                                #     '--onedir',
-                                #     '--name', 'my_app2',
-                                #     '--distpath', str(os.path.join(__DIR__, 'output')),
-                                #     'test_compile.py'
+                                #     'pyinstaller',                                         เรียกชื่อ module
+                                #     '--noconfirm',                                         ไม่มีการแสดงยืนยัน
+                                #     '--onedir',                                            แบบ directory ไม่ใช่ไฟล์ๆเดียว
+                                #     '--name', 'my_app2',                                   ชื่อแอปพลิเคชั่น
+                                #     '--distpath', str(os.path.join(__DIR__, 'output')),    path ในการเก็บเมื่อ compiled
+                                #     'test_compile.py'                                      ตัว script ที่ต้องการ compile
                                 # ])
                             '''
 
-                            default_settings = [
+                            default_settings = [                        # ไม่ได้ใช้
                                 "pyinstaller",
                                 "--noconfirm",
                                 "--onedir",
@@ -193,7 +210,7 @@ class Server:
                                 "python_script.py"
                             ]
 
-                            default_commands = {
+                            default_commands = {                        # ดูเป็นโคร่งสร้าง ไม่ได้ใช้เช่นกัน
                                 "pyinstaller": "pyinstaller",
                                 "--noconfirm": "--noconfirm",
                                 "category_output": [
@@ -207,14 +224,14 @@ class Server:
                                 "--uac-admin": None
                             }
 
-                            exec_list = [
+                            exec_list = [                                # เก็บ args สำหรับการ compile
                                 "pyinstaller",
                                 "--noconfirm",
                             ]
 
 
-                            if "options" in package_decoded:
-                                if isinstance(package_decoded['options'], dict):
+                            if "options" in package_decoded:            # มีการส่ง options มาไหม
+                                if isinstance(package_decoded['options'], dict):    # options ต้องอยู่ในรูปแบบของ Dict
 
                                     # category output condition
                                     if "category_output" in package_decoded['options']:
