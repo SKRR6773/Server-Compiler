@@ -4,8 +4,8 @@ import os
 import threading
 import datetime
 import json
-from lib import generate_uuid_without, encode_package, decode_package
-from control import control
+from lib import generate_uuid_without, encode_package, decode_package    # มาจาก lib.py ใน folder เดียวกัน
+from control import control                                              # มาจาก control.py ใน folder เดียวกัน
 
 
 def recv_async(server):
@@ -58,10 +58,10 @@ while True:
         print(data)
         print()
 
-        if isinstance(data, dict):
-            package_encode = encode_package(data).encode()
+        if isinstance(data, dict):                            # ส่ง package ปกติ
+            package_encode = encode_package(data).encode()    # แปลง Dict เป็น json string และ encode
 
-        else:
+        else:                                                  # ส่งไฟล์
             server.sendall(data)
 
 
