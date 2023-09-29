@@ -1,0 +1,10 @@
+{
+    "hostname": "localhost",
+    "port": 8990,
+    "listen": 10,
+    "socket-timeout": 5,
+    "buffer": 4096,
+    "output-directory": "output",
+    "limit-icon-size": 10485760,
+    "limit-requirement-size": 1048576
+}
